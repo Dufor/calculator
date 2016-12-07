@@ -1,0 +1,29 @@
+.calc {
+    width: 150px;
+    height: 190px;
+    border-collapse: collapse;
+   
+}
+
+
+.display {
+    width: 100%;
+    height: 18%;
+    background:  #404037;
+    color: white; 
+    text-align: right;
+    border-radius: 3px;
+}
+
+.button,
+.equals,
+.oper {
+    width: 25%;
+    height: 20%;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+.equals {
+    background-color: orange;
+}

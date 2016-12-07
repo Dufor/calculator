@@ -2,9 +2,10 @@
 
 function renderDisplay (state) {
     let display = document.createElement('div');
+    display.className = 'display';
     if (state.length === 1 || state.length === 2)      {
-        display.innerHTML = state[0];
-     }
+                display.innerHTML = state[0];
+            } 
     if (state.length === 3) {
         display.innerHTML = state[2];
     }
@@ -18,7 +19,9 @@ function renderCalculator (state, onState) {
         let nextState = state.slice();
         if (nextState.length === 1) {
             if (state[0] === 0) {
-                nextState = [num];
+                if (num != 0) {
+                    nextState = [num];
+                }
             }  else {
                 nextState[0] = nextState[0] + num;
             }
@@ -53,9 +56,9 @@ function renderCalculator (state, onState) {
                 nextState = [leftNum - rightNum];
             } else if (midOp === '+') {
                 nextState = [leftNum + rightNum];
-            } else if (midOp === '*') {
+            } else if (midOp === 'x') {
                 nextState = [leftNum * rightNum];
-            } else if (midOp === '%') {
+            } else if (midOp === '/') {
                 nextState = [leftNum / rightNum];  
             }  
     return nextState;
@@ -75,6 +78,7 @@ function renderCalculator (state, onState) {
         }
 
     let calc = document.createElement('div');
+    calc.className = 'calc';
    
     let level1 = document.createElement('div');
     let level2 = document.createElement('div');
@@ -87,39 +91,42 @@ function renderCalculator (state, onState) {
     calc.appendChild(level3);
     calc.appendChild(level4);
 
-    level1.appendChild(renderButton('7', updateStateWithNumber));
-    level1.appendChild(renderButton('8', updateStateWithNumber));
-    level1.appendChild(renderButton('9', updateStateWithNumber));
-    level1.appendChild(renderButton('C', useReset));
+    level1.appendChild(renderButton('7', updateStateWithNumber, 'button number'));
+    level1.appendChild(renderButton('8', updateStateWithNumber, 'button number'));
+    level1.appendChild(renderButton('9', updateStateWithNumber, 'number'));
+    level1.appendChild(renderButton('C', useReset, 'oper'));
 
-    level2.appendChild(renderButton('4', updateStateWithNumber));
-    level2.appendChild(renderButton('5', updateStateWithNumber));
-    level2.appendChild(renderButton('6', updateStateWithNumber));
-    level2.appendChild(renderButton('%', updateStateWithOperator));
+    level2.appendChild(renderButton('4', updateStateWithNumber, 'number'));
+    level2.appendChild(renderButton('5', updateStateWithNumber, 'number'));
+    level2.appendChild(renderButton('6', updateStateWithNumber, 'number'));
+    level2.appendChild(renderButton('/', updateStateWithOperator, 'oper'));
 
-    level3.appendChild(renderButton('1', updateStateWithNumber));
-    level3.appendChild(renderButton('2', updateStateWithNumber));
-    level3.appendChild(renderButton('3', updateStateWithNumber));
-    level3.appendChild(renderButton('x', updateStateWithOperator));
+    level3.appendChild(renderButton('1', updateStateWithNumber, 'number'));
+    level3.appendChild(renderButton('2', updateStateWithNumber, 'number'));
+    level3.appendChild(renderButton('3', updateStateWithNumber, 'number'));
+    level3.appendChild(renderButton('x', updateStateWithOperator, 'oper'));
 
-    level4.appendChild(renderButton('0', updateStateWithNumber));
-    level4.appendChild(renderButton('-', updateStateWithOperator));
-    level4.appendChild(renderButton('+', updateStateWithOperator));
-    level4.appendChild(renderButton('=', calculate));
+    level4.appendChild(renderButton('0', updateStateWithNumber, 'number'));
+    level4.appendChild(renderButton('-', updateStateWithOperator, 'oper'));
+    level4.appendChild(renderButton('+', updateStateWithOperator, 'oper'));
+    level4.appendChild(renderButton('=', calculate, 'equals'));
 
     return calc;
 }
 
-function renderButton (title, onClick) {
+function renderButton (title, onClick, className) {
     let rendButt = document.createElement('button');
+    rendButt.className = className;
     rendButt.innerHTML = title;
     rendButt.onclick = function () {
         onClick(title);
-        };
+        }
     return rendButt;
 }
+ 
 
 let initialState = [0];
+
 
 function onStateUpdate(nextState) {
   document.body.innerHTML = '';
