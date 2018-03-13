@@ -91,8 +91,8 @@ function renderCalculator (state, onState) {
     calc.appendChild(level3);
     calc.appendChild(level4);
 
-    level1.appendChild(renderButton('7', updateStateWithNumber, 'button number'));
-    level1.appendChild(renderButton('8', updateStateWithNumber, 'button number'));
+    level1.appendChild(renderButton('7', updateStateWithNumber, 'number'));
+    level1.appendChild(renderButton('8', updateStateWithNumber, 'number'));
     level1.appendChild(renderButton('9', updateStateWithNumber, 'number'));
     level1.appendChild(renderButton('C', useReset, 'oper'));
 
